@@ -15,20 +15,7 @@
 </head>
 <body>
 
-    <!-- POPUP OVERLAY -->
-    <div class="popup-overlay" id="popup-overlay">
-        <div class="popup-card" id="popup-card">
-            <button class="popup-close" id="popup-close">&#x2715;</button>
-            <img src="" alt="" id="popup-img">
-            <div class="popup-body">
-                <h3 id="popup-name"></h3>
-                <p id="popup-desc"></p>
-                <div id="popup-size-section"></div>
-                <button class="popup-add-btn" id="popup-add-btn">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-
+    
     <!-- NAV -->
     <nav>
         <div class="logo">
@@ -53,7 +40,12 @@
             <div><a href="#">GET THE APP</a></div>
         </div>
         <div class="nav-icons">
-            <div class="nav-icons-cart"><a href="./addtocart/addtocart.html"><i class="ri-shopping-cart-line"></i></a></div>
+            <div class="nav-icons-cart">
+                <a href="./addtocart/addtocart.html">
+                    <i class="ri-shopping-cart-line"></i>
+                </a>
+                <span class="cart-count1">0</span>
+            </div>    
             <div><a href="#"><i class="ri-user-3-line"></i> <span>My Account</span></a></div>
         </div>
     </nav>
@@ -67,6 +59,7 @@
         <div class="items"><a href="#section-heading-fries">Fries</a></div>
         <div class="items"><a href="#section-heading-friedchicken">Fried Chicken</a></div>
         <div class="items"><a href="#section-heading-sandwich">Sandwiches</a></div>
+        <div class="items"><a href="#section-heading-breakfast">BreakFast</a></div>
         <div class="items"><a href="#section-heading-extra">Extras</a></div>
     </div>
 
@@ -116,15 +109,63 @@
         </div>
     </footer>
 
+
+    <div class="footer">
+    <div class="footer-container">
+
+        <div class="copyright">
+            KECH FOOD CENTER. All rights reserved
+        </div>
+
+        <div class="powered-by">
+            <span>Powered By</span>
+            <a href="#">Beebagre Tahir Solutions</a>
+        </div>
+    </div>
+    </div>
+
     <!-- BOTTOM NAV -->
     <div class="bottom-nav">
         <a href="#" class="bottom-nav-items"><i class="fa-regular fa-circle-user"></i><span>My Account</span></a>
         <a href="#" class="bottom-nav-items"><i class="fa-solid fa-store"></i><span>Store</span></a>
         <a href="#" class="bottom-nav-items"><i class="fa-solid fa-utensils"></i><span>Menu</span></a>
         <a href="#" class="bottom-nav-items"><i class="ri-e-bike-2-fill"></i><span>Track Order</span></a>
-        <a href="./addtocart/addtocart.html" class="bottom-nav-items"><i class="ri-shopping-cart-line"></i><span>My Cart</span></a>
+        <a href="./addtocart/addtocart.html" class="bottom-nav-items">
+    <div style="position: relative; display: inline-block;">
+        <i class="ri-shopping-cart-line"></i><span class="cart-count2">10</span></div><span>My Cart</span></a>
     </div>
 
-    <script src="script.js"></script>
+
+
+
+<div class="popup-overlay">
+    <div id="pop-up">
+        <!-- <button class="popup-close-btn" id="popup-close">&#x2715;</button>
+        <img class="popup-image" src="" alt="">
+        <h4 class="popup-name"></h4>
+        <p class="popup-para"></p>
+        <h5 class="popup-price"></h5>
+        <div class="sizes-grid">
+            <button>small</button>
+            <button>small</button>
+            <button>small</button>
+            <button>small</button>
+        </div>
+        <button class="popup-add-btn">Add to Cart</button> -->
+    </div>
+</div>
+
+
+<!-- Advertisement Popup -->
+<div class="advert-overlay">
+    <div class="advert-popup">
+        <button class="advert-close">&times;</button>
+        <img src="./images/kech food center advest.png" alt="Today's Deal">
+    </div>
+</div>
+
+
+<!--  -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>

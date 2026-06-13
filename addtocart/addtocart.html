@@ -3,206 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domino's Cart</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #f5f5f5;
-            padding: 20px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        header .logo img {
-            height: 40px;
-        }
-
-        header nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #000;
-            font-weight: 600;
-        }
-
-        .cart-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .cart-main {
-            flex: 2;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .cart-main h2 {
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .cart-main p {
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        .cart-main button {
-            padding: 10px 20px;
-            background-color: #0056b3;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .suggestions {
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .suggestions h3 {
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-
-        .suggestion-items {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .suggestion-item {
-            background: #fff;
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            width: 150px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .suggestion-item img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        .cart-sidebar {
-            flex: 1;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            height: fit-content;
-        }
-
-        .cart-sidebar h4 {
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .voucher-input {
-            display: flex;
-            margin-bottom: 20px;
-        }
-
-        .voucher-input input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px 0 0 5px;
-            outline: none;
-        }
-
-        .voucher-input button {
-            padding: 8px 12px;
-            border: none;
-            background-color: #f56c6c;
-            color: #fff;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-        }
-
-        .order-detail {
-            background-color: #0056b3;
-            color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .order-detail svg {
-            width: 25px;
-            height: 25px;
-        }
-
-        .total {
-            margin-top: 15px;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        @media(max-width: 900px) {
-            .cart-container {
-                flex-direction: column;
-            }
-
-            .cart-sidebar {
-                order: -1;
-            }
-        }
-    </style>
+    <title>Kech Food Center Cart</title>
+    <link rel="icon" href="../images/bb4d6e33f181fa58432a39a27a107d66.png"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="addtocart.css">
 </head>
 <body>
 
-<header>
+<nav>
     <div class="logo">
-        <img src="./images/" alt="">
+        <a href="../index.html">
+            <img src="../images/kfc_turbat_logo edited.png" width="100px" alt="Logo">
+        </a>
     </div>
-    <nav>
+    <div class="nav-items">
         <a href="#">MENU</a>
-        <a href="#">STORES</a>
+        <a href="#">STORE</a>
         <a href="#">GET THE APP</a>
-    </nav>
-    <div class="account">
-        <a href="#">🛒 0</a>
-        <a href="#">MY ACCOUNT</a>
     </div>
-</header>
-
-<div class="cart-container">
-    <div class="cart-main">
-        <h2>My Cart</h2>
-        <p>Your cart is currently empty, but your stomach doesn't have to be. Add some items and come back here to checkout.</p>
-        <a href="/index.html"><button>START YOUR ORDER</button></a>
-
-        
+    <div class="nav-icons">
+        <div class="nav-icons-cart">
+            <a href="#"><i class="ri-shopping-cart-line"></i></a>
+            <span class="cart-count2">0</span>
+        </div>
+        <div><a href="#"><i class="ri-user-3-line"></i> <span>My Account</span></a></div>
     </div>
+</nav>
 
-    <div class="cart-sidebar">
-       
-        <div class="total">
-            <span>Grand Total</span>
-            <span>Rs. 0</span>
+<div class="page-wrapper">
+
+    <div class="cart-left">
+        <div class="cart-header">
+            <a href="../index.html" class="back-btn"><i class="ri-arrow-left-s-line"></i></a>
+            <h2>MY CART</h2>
+        </div>
+        <hr>
+
+        <div class="cart-items-container">
+            <!-- <div class="cart-item">
+                <div class="cart-item-left">
+                    <img src="../images/malai tikka pizza.jpg" alt="Chicken Burger">
+                    <div>
+                        <p class="cart-item-name">Malai Tikka Pizza Large</p>
+                        <p class="cart-item-price">Rs. 1200</p>
+                    </div>
+                </div>
+                <div class="cart-item-controls">
+                    <button class="delete-btn"><i class="ri-delete-bin-line"></i></button>
+                    <span class="cart-item-qty">10</span>
+                    <button class="add-btn">+</button>
+                </div>
+                <p class="cart-item-total">RS<br>12000</p>
+            </div> -->
+        </div>
+
+        <div class="you-may-like">
+            <hr>
+            <h3>Hurry Up! Order Now🍴</h3>
+            <div class="suggestions-row"></div>
         </div>
     </div>
+
+    <div class="cart-right">
+        <div class="voucher-box">
+            <h4>Add a Voucher Code</h4>
+            <div class="voucher-input">
+                <input type="text" placeholder="Enter Voucher Code">
+                <button>Apply</button>
+            </div>
+        </div>
+
+        <div class="order-details-box">
+            <h4>Order Details</h4>
+            <div class="order-items-list"></div>
+            <div class="order-info-btn">
+                <div class="info-card">
+                    <i class="ri-store-2-line"></i>
+                    <div>
+                        <p class="info-label">FROM</p>
+                        <p class="info-value">KECH FOOD CENTER Turbat</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <i class="ri-e-bike-2-fill"></i>
+                    <div>
+                        <p class="info-label">PUT YOUR ADDRESS</p>
+                        <p class="info-value" id="order-time"></p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- price breakdown total and grand total -->
+                    <div class="price-breakdown">
+            <div class="price-row">
+                <span>Total</span>
+                <span class="breakdown-total">Rs. 0</span>
+            </div>
+            <div class="price-row">
+                <span>Delivery Charges</span>
+                <span class="breakdown-dilavery">Rs. 0</span>
+            </div>
+            <div class="price-row grand">
+                <span>Grand Total</span>
+                <span class="breakdown-grand">Rs. 0</span>
+            </div>
+            <!--  -->
+</div>
+            <textarea  class="input-address"  placeholder="Address and Instructions for Delivery Expert..."></textarea>
+                           
+        </div>
+
+        <div class="confirm-bar">
+            <span id="confirm-summary"> <span class="confirm-summary-items" >10 ITEMS</span> | <span class="confirm-summary-Total-price">RS. 12000</span></span>
+            <P></P>
+            <button class="confirm-button">CONFIRM ORDER</button>
+        </div>
+    </div>
+
+    
 </div>
 
+<footer class="footer">
+    <div class="footer-container">
+        <div class="copyright">KECH FOOD CENTER. All rights reserved</div>
+        <div class="powered-by">
+            <span>Powered By</span>
+            <a href="#">Beebagre Tahir Solutions</a>
+        </div>
+    </div>
+</footer>
+
+<div class="bottom-nav">
+    <a href="#" class="bottom-nav-items"><i class="fa-regular fa-circle-user"></i><span>My Account</span></a>
+    <a href="#" class="bottom-nav-items"><i class="fa-solid fa-store"></i><span>Store</span></a>
+    <a href="../index.html" class="bottom-nav-items"><i class="fa-solid fa-utensils"></i><span>Menu</span></a>
+    <a href="#" class="bottom-nav-items"><i class="ri-e-bike-2-fill"></i><span>Track Order</span></a>
+    <a href="#" class="bottom-nav-items">
+        <div style="position:relative;display:inline-block;">
+            <i class="ri-shopping-cart-line"></i>
+            <span class="cart-count1">0</span>
+        </div>
+        <span>My Cart</span>
+    </a>
+</div>
+
+<script src="addtocart.js"></script>
 </body>
 </html>

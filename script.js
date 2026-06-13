@@ -1,10 +1,34 @@
+// adivstment popup----------------------------------------///////////////
+let advistementOverlay = document.querySelector(".advert-overlay")
+
+window.onload = ()=>{
+     advistementOverlay.style.display = "flex"
+}
+
+advistementOverlay.addEventListener("click",(event)=>{
+    if(event.target === advistementOverlay ){ document.querySelector(".advert-overlay").style.display = "none"}
+})
+
+document.querySelector(".advert-close").addEventListener("click",()=>{
+     document.querySelector(".advert-overlay").style.display = "none"
+
+})
+// ── adding module ─────────────────────────────────────────────────
+// import {cart} from "./addtocart/addtocart.js"
+
+let cart = JSON.parse(localStorage.getItem('cart')) || []
+
+
+console.log(cart)
+
+
 // ── Menu Data ─────────────────────────────────────────────────
 const menuSection = [
     {
         id: "section-heading-pizza",
         title: "PIZZA PREMIUM",
         items: [
-            { name: "Chicken Pizza",    image: "./images/Sauce-Boss-50kb_variant_.jpg",                                                    desc: "Secret sauce base, mozzarella cheese, Tex Max",                              smallPizzaPrice: 400, mediumPizzaPrice: 800,  largePizzaPrice: 1200, extraLargePizza: 1800 },
+            { name: "Chicken Pizza",    image: "./images/Sauce-Boss-50kb_variant_.jpg",                                                    desc: "Secret sauce base, mozzarella cheese, Tex Max",                              smallPizzaPrice: 500, mediumPizzaPrice: 800,  largePizzaPrice: 1200, extraLargePizza: 1800 },
             { name: "Fajita Pizza",     image: "./images/CreamyTikka-HandTossedTopcopy_variant_0-2024-11-07073417.jpg",                    desc: "Cheese mayo base, mozzarella cheese, chicken",                               smallPizzaPrice: 500, mediumPizzaPrice: 1000, largePizzaPrice: 1400, extraLargePizza: 2000 },
             { name: "BBQ Pizza",        image: "./images/CreamyTikka-HandTossedTopcopy_variant_0-2024-11-07073417.jpg",                    desc: "BBQ sauce, cheese mayo base, mozzarella cheese, chicken",                    smallPizzaPrice: 500, mediumPizzaPrice: 1000, largePizzaPrice: 1400, extraLargePizza: 2000 },
             { name: "Tikka Pizza",      image: "./images/-ChickenTikka_4.jpg",                                                             desc: "Pizza sauce base, mozzarella cheese, chicken tikka chunks",                  smallPizzaPrice: 500, mediumPizzaPrice: 1000, largePizzaPrice: 1400, extraLargePizza: 2000 },
@@ -74,8 +98,20 @@ const menuSection = [
             { name: "Club Sandwich",           image: "./images/club sandwich.jpg",    desc: "Grilled chicken, fresh lettuce and cheese in a classic club style",  price: 550 },
             { name: "Grilled Chicken Sandwich",image: "./images/grilled sandwich.jpg", desc: "Smoky BBQ sauce, grilled chicken fillet, toasted to perfection",    price: 600 }
         ]
-    },
-    {
+    },  {
+        id: "section-heading-breakfast",
+        title: "BREAKFAST",
+        items: [
+            { name: "Omelette ",      image: "./images/omelette roll.png",    desc: "Freshly made omelette with vegetables, wrapped in love",         price: 120 },
+            { name: "Anda Paratha",       image: "./images/anda paratha.jpg",     desc: "Crispy paratha served with fried egg and chutney",                  price: 100 },
+            { name: "Halwa Puri",         image: "./images/halwa purii.jpg",       desc: "Traditional halwa with crispy puris, a classic breakfast",          price: 150 },
+            { name: "Channa Paratha",     image: "./images/channa paratha.jpg",   desc: "Spicy channa curry served with fresh paratha",                      price: 130 },
+            { name: "French Toast",       image: "./images/french toast.jpg",     desc: "Golden fried bread with honey and cream, sweet morning treat",      price: 120 },
+            { name: "Boiled Eggs",        image: "./images/boiled eggs.jpg",      desc: "Two perfectly boiled eggs served with salt and pepper",             price: 80  },
+            { name: "Lassi",              image: "./images/lassi.jpg",            desc: "Fresh sweet or salted lassi made with pure dahi",                   price: 100 },
+            { name: "Chai",               image: "./images/chai.jpg",             desc: "Desi dhaba style chai, perfectly brewed with milk and spices",      price: 50  }
+    ]
+    },{
         id: "section-heading-extra",
         title: "EXTRAS",
         items: [
@@ -87,6 +123,8 @@ const menuSection = [
     }
 ];
 
+
+// console.log(menuSection[2])
 // ── Get size options from an item ─────────────────────────────
 function getSizeOptions(item) {
     const sizes = [];
@@ -103,134 +141,213 @@ function getSizeOptions(item) {
     return sizes;
 }
 
-// ── Render menu cards ─────────────────────────────────────────
 let html = '';
+
 menuSection.forEach((section) => {
     if (!section.items || section.items.length === 0) return;
+    
+    html +=`<h3 id="${section.id}">${section.title}</h3><div class="pizza-section">`;
+    
+    section.items.forEach((item,index)=>{
 
-    html += `<h3 id="${section.id}">${section.title}</h3><div class="pizza-section">`;
-
-    section.items.forEach((item, index) => {
-        const sizes = getSizeOptions(item);
-        const basePrice = item.price ?? sizes[0]?.price ?? 0;
-
-        html += `
-        <div class="pizza-section-boxes" onclick="openPopup('${section.id}', ${index})">
-            <img src="${item.image}" alt="${item.name}" loading="lazy">
-            <div class="manu-card-cointainer">
-                <h4>${item.name}
-                    <a href="#" onclick="event.stopPropagation(); toggleWishlist(this)">
-                        <i class="ri-heart-line"></i>
-                    </a>
-                </h4>
-                <p>${item.desc}</p>
-                <h5>From <span>Rs.${basePrice}</span></h5>
-            </div>
+        item.id = `${section.id}-${index}`
+        
+        let sizes = getSizeOptions(item)
+        html +=  `
+        <div class="pizza-section-boxes" data-section-id = "${section.id}" data-index = "${index}" ">
+        <img src="${item.image}" alt="${item.name}" loading="lazy">
+        <div class="manu-card-cointainer">
+        <h4>${item.name}
+        <a href="# >
+        <i class="ri-heart-line"></i>
+        </a>
+        </h4>
+        <p>${item.desc}</p>
+        <h5>From <span>Rs.${sizes.length > 0 ? sizes[0].price : item.price}</span></h5>
+        
+        </div>
         </div>`;
+    })
+    html += '</div>'
+});
+
+
+
+let sizes;
+
+
+document.querySelector(".menu-container").addEventListener("click",(event)=>{
+    
+    const clickedItem = event.target.closest(".pizza-section-boxes")
+    // console.log(clickedItem.dataset.sectionId)
+    // console.log(clickedItem.dataset.index)
+    
+    const sectionId = clickedItem.dataset.sectionId
+    const itemNum = clickedItem.dataset.index
+    
+    
+    let foundSection = menuSection.find(section => section.id === sectionId)  // find means looping to manusec saving each object into section and then if section.id === sectionId then save it to found section
+    
+    let foundItem = foundSection.items[itemNum]
+    
+    sizes = getSizeOptions(foundItem)
+    
+    let popupHtml = ''
+    
+    popupHtml = `<button class="popup-close-btn" id="popup-close">&#x2715;</button>
+    <img class="popup-image" src="${foundItem.image}" alt="">
+    <h4 class="popup-name">${foundItem.name}</h4>
+    <p class="popup-para">${foundItem.desc}</p>
+    
+    <div class = "chose-size"><h3>CHOOSE A SIZE</h3>
+        <div class = "sizes-grid">
+            
+        </div>
+    </div>
+
+    <h5 class="popup-price">RS:${sizes.length > 0 ? sizes[0].price : foundItem.price}</h5>
+    <button class="popup-add-btn">Add to Cart - RS:${sizes.length > 0 ? sizes[0].price : foundItem.price}</button>`
+    
+
+
+        
+        
+        // console.log("popup opened")
+        document.querySelector(".popup-overlay").style.display = "flex" 
+        
+        document.querySelector("#pop-up").innerHTML = popupHtml
+        // console.log(popupHtml)
+        
+        let closeBtn = document.querySelector(".popup-close-btn")
+        closeBtn.addEventListener(("click"),(event)=>{
+                document.querySelector(".popup-overlay").style.display = "none" 
+        })
+
+        let popupOverlay = document.querySelector(".popup-overlay")
+        popupOverlay.addEventListener("click",(event)=>{
+            if(event.target === popupOverlay){    
+            document.querySelector(".popup-overlay").style.display = "none";
+            } 
+        })
+
+
+
+        if(sizes.length > 0){
+            sizes.forEach((item,index) => {
+                document.querySelector(".sizes-grid").innerHTML +=
+                
+                `<button data-price = "${item.price}" data-label = ${item.label} class = "popup-multi-button-${index} popup-multi-button">${item.label} <p> &nbspRs.${item.price}</p> </button>`
+
+            document.querySelector(".chose-size").style.display = "contents"
+            document.querySelector(".popup-price").style.display = "none"
+                
+
+        });
+        
+        let popupMultiButtons = document.querySelectorAll(".popup-multi-button")
+
+        popupMultiButtons.forEach((button) => {
+          button.addEventListener("click", (event) => {
+            popupMultiButtons.forEach((btn) =>
+              btn.classList.remove("selected"),
+            );
+            event.target.classList.add("selected");
+            let addToCartBtn = document.querySelector(".popup-add-btn")
+
+            let btnPrice = button.dataset.price
+            let btnLabel = button.dataset.name
+
+            addToCartBtn.innerHTML = `Add to Cart - RS:${btnPrice}`
+          });
+        });            
+        }
+
+        addedToCart(foundItem)
     });
 
-    html += `</div>`;
-});
 
-document.querySelector('.menu-container').innerHTML = html;
+function addedToCart(foundItem) {
+  let addtocartBtn = document.querySelectorAll(".popup-add-btn");
+  let baseSelected = document.querySelector(".popup-multi-button-0")
+  let quantity = 1;
+  addtocartBtn.forEach((btn) => {
+      
+    if (sizes.length > 0){
+        baseSelected.classList.add("selected");}
+      
+      btn.addEventListener("click", () => {
+            document.querySelector(".popup-overlay").style.display = "none";
 
-// ── Wishlist toggle ───────────────────────────────────────────
-function toggleWishlist(el) {
-    const icon = el.querySelector('i');
-    if (icon.classList.contains('ri-heart-line')) {
-        icon.classList.replace('ri-heart-line', 'ri-heart-fill');
-        el.style.color = '#e74c3c';
-    } else {
-        icon.classList.replace('ri-heart-fill', 'ri-heart-line');
-        el.style.color = '#ccc';
-    }
-}
+        let selectedButton = document.querySelector(".popup-multi-button.selected")
 
-// ── Popup ─────────────────────────────────────────────────────
-let currentItem = null;
-let selectedPrice = 0;
-
-const overlay   = document.getElementById('popup-overlay');
-const popupImg  = document.getElementById('popup-img');
-const popupName = document.getElementById('popup-name');
-const popupDesc = document.getElementById('popup-desc');
-const popupSize = document.getElementById('popup-size-section');
-const addBtn    = document.getElementById('popup-add-btn');
-const closeBtn  = document.getElementById('popup-close');
-
-function openPopup(sectionId, itemIndex) {
-    const section = menuSection.find(s => s.id === sectionId);
-    if (!section) return;
-    const item = section.items[itemIndex];
-    if (!item) return;
-
-    currentItem = item;
-    const sizes = getSizeOptions(item);
-
-    popupImg.src = item.image;
-    popupImg.alt = item.name;
-    popupName.textContent = item.name;
-    popupDesc.textContent = item.desc;
-
-    if (sizes.length > 0) {
-        selectedPrice = sizes[0].price;
-
-        let sizesHTML = `<p class="size-label">Choose a size</p><div class="size-grid">`;
-        sizes.forEach((size, i) => {
-            sizesHTML += `
-            <button class="size-btn ${i === 0 ? 'selected' : ''}"
-                onclick="selectSize(this, ${size.price})">
-                <div class="sz">${size.label}</div>
-                <div class="pr">Rs. ${size.price.toLocaleString()}</div>
-            </button>`;
+       
+        let btnPrice = selectedButton ? selectedButton.dataset.price : null;
+        let btnLabel = selectedButton ? selectedButton.dataset.label : null;
+    let matchingItems = cart.find((cartItems) => cartItems.itemId === foundItem.id);
+      
+    if(sizes.length > 0){
+                let matchingItem = cart.find(cartItem => cartItem.itemId === foundItem.id && cartItem.itemLabel === btnLabel
+                )
+                if(matchingItem){   
+                matchingItem.itemQuantity += 1
+            } else {
+                cart.push({ itemName: foundItem.name,
+                    itemLabel : btnLabel,
+                itemPrice: btnPrice,
+                itemImage: foundItem.image,
+                itemId: foundItem.id,
+                itemQuantity: quantity,})
+            }
+    } else if (matchingItems) {
+        matchingItems.itemQuantity += 1;
+      } else {
+        cart.push({
+          itemName: foundItem.name,
+          itemPrice: foundItem.price,
+          itemImage: foundItem.image,
+          itemId: foundItem.id,
+          itemQuantity: quantity,
+          itemLabel: ''
         });
-        sizesHTML += `</div>`;
-        popupSize.innerHTML = sizesHTML;
-    } else {
-        selectedPrice = item.price ?? 0;
-        popupSize.innerHTML = `<p class="single-price">Rs. ${selectedPrice.toLocaleString()}</p>`;
-    }
+      }
+      localStorage.setItem('cart',JSON.stringify(cart))
 
-    updateAddBtn();
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function selectSize(btn, price) {
-    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    selectedPrice = price;
-    updateAddBtn();
-}
-
-function updateAddBtn() {
-    addBtn.textContent = `Add to Cart — Rs. ${selectedPrice.toLocaleString()}`;
-}
-
-function closePopup() {
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-    currentItem = null;
-}
-
-closeBtn.addEventListener('click', closePopup);
-overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
-
-addBtn.addEventListener('click', () => {
-    if (!currentItem) return;
-    // ── Your cart logic goes here ──
-    console.log('Added to cart:', currentItem.name, '| Price: Rs.', selectedPrice);
-    // Example: addToCartArray(currentItem, selectedPrice);
-    closePopup();
+      updateCartHtml()
+      
+    });
 });
+}
 
-// ── Active nav highlight on scroll ───────────────────────────
+
+
+document.querySelector(".menu-container").innerHTML = html;
+
+function updateCartHtml(){
+let cartCount1 =  document.querySelector(".cart-count1")
+let cartCount2 =  document.querySelector(".cart-count2")
+  
+    let quantity = 0
+    cart.forEach(item =>{
+        quantity += item.itemQuantity
+    })
+ 
+    
+    
+    cartCount1.innerHTML = quantity
+    cartCount2.innerHTML = quantity
+}
+
+updateCartHtml()
+
+
+
 const sections = document.querySelectorAll('h3[id]');
 const navLinks = document.querySelectorAll('.nav2 .items a');
+const nav2 = document.querySelector('.nav2')
 
 window.addEventListener('scroll', () => {
     let current = '';
-
+    
     sections.forEach(sec => {
         if (window.scrollY >= sec.offsetTop - 170) {
             current = sec.getAttribute('id');
@@ -239,9 +356,17 @@ window.addEventListener('scroll', () => {
 
     navLinks.forEach(link => {
         link.parentElement.classList.remove('active');
+        
         if (link.getAttribute('href') === `#${current}`) {
             link.parentElement.classList.add('active');
-            link.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            
+            setTimeout(() => {
+                link.parentElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    inline: 'center', 
+                    block: 'nearest' 
+                })
+            }, 100)
         }
     });
 });
