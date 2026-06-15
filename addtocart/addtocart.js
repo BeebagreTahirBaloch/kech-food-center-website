@@ -1,5 +1,5 @@
 let cart = JSON.parse(localStorage.getItem('cart')) || []
-// console.log(cart)
+console.log(cart)
 
 
 
@@ -9,191 +9,138 @@ let orderDetails = document.querySelector(".order-details-box")
 
 
 
+cartItemsContainer.addEventListener("click",(event)=>{
+
+    let addbtn = event.target.closest(".add-btn")
+    let deletebtn = event.target.closest(".delete-btn")
+
+    // let addbtnIndex = addbtn.dataset.index
+    // let deletebtnIndex = deletebtn.dataset.index
+    
+    if(!addbtn && !deletebtn){
+        return
+    }
+
+
+    if(addbtn){
+        cart[addbtn.dataset.index].quantity += 1
+        localStorage.setItem('cart',JSON.stringify(cart))
+        rendering()
+    }
+
+
+    if(deletebtn){
+
+        cart[deletebtn.dataset.index].quantity -= 1
+
+        if(cart[deletebtn.dataset.index].quantity <= 0){
+            cart.splice(deletebtn.dataset.index,1)
+        }
+        localStorage.setItem('cart',JSON.stringify(cart))
+        
+        rendering()
+    }
+})
+
+
+
+
+
+
+if(cart.length > 0){
 
 confirmButton.addEventListener("click",()=>{
     inputAdress =  document.querySelector(".input-address")
     if(inputAdress.value === ''){
         alert("Please enter Your Adress")}
 })
-
-
-
-
-
-cartItemsContainer.addEventListener("click",(event)=>{
-    let cartItem = event.target.closest(".cart-item")
-    let addbtn = event.target.closest(".add-btn")
-    let deletebtn = event.target.closest(".delete-btn")
-
-
-    if(!cartItem){
-        return
-    }
-    
-
-
-    let index = cartItem.dataset.index
-
-    if(addbtn){
-        cart[index].itemQuantity += 1
-        localStorage.setItem('cart',JSON.stringify(cart)) 
-        rendering()
-    }
-
-    if(deletebtn){
-        cart[index].itemQuantity -= 1
-        if(cart[index].itemQuantity <= 0){
-            cart.splice(index,1)
-        }
-        localStorage.setItem('cart',JSON.stringify(cart))
-
-        rendering()
-    }
-})
+}
 
 
 
 function rendering(){
-            cartHtml = ''
-            cart.forEach((item,index) => {
-            cartHtml += `
-            <div class="cart-item" data-index ="${index}">
+let cartHtml = ''
+cart.forEach((item,index)=>{
+    
+    let Total = item.quantity * item.price
+
+
+    cartHtml += ` <div class="cart-item">
                 <div class="cart-item-left">
-                    <img src=".${item.itemImage}" alt="${item.itemName}">
+                    <img src=".${item.image}" alt="${item.name}">
                     <div>
-                        <p class="cart-item-name">${item.itemName} ${item.itemLabel}</p>
-                        <p class="cart-item-price">Rs. ${item.itemPrice}</p>
+                        <p class="cart-item-name">${item.name} &nbsp ${item.label}</p>
+                        <p class="cart-item-price">Rs. ${item.price}</p>
                     </div>
                 </div>
                 <div class="cart-item-controls">
-                    <button class="delete-btn"><i class="ri-delete-bin-line"></i></button>
-                    <span class="cart-item-qty">${item.itemQuantity}</span>
-                    <button class="add-btn">+</button>
+                    <button data-index="${index}" class="delete-btn"><i class="ri-delete-bin-line"></i></button>
+                    <span class="cart-item-qty">${item.quantity}</span>
+                    <button data-index="${index}" class="add-btn">+</button>
                 </div>
-                <p class="cart-item-total">RS<br>12000</p>
-                </div>`;
-                });
+                <p class="cart-item-total">RS<br>${Total}</p>
+            </div>`
+
+        })
 
 
-
-            if (cart.length === 0) {
-              orderDetails.style.display = "none";
-              document.querySelector(".confirm-bar").style.display = "none";
-              document.querySelector(".voucher-box").style.display = "none";
-
-            cartItemsContainer.innerHTML = `
-            <div class="empty-cart">
+      if(cart.length === 0 ){
+        // cartItemsContainer.style.display = "none"
+        document.querySelector(".voucher-box").style.display = "none"
+        document.querySelector(".confirm-button").style.color = "red"
+        document.querySelector(".confirm-button").addEventListener("click",()=>{
+            alert("Add something to the Cart🍕🍔🍟")
+        })
+        cartItemsContainer.innerHTML = `<div class="empty-cart">
             <p>Your cart is empty! But Your Stomach does not have to!</p>
             <a href="../index.html"><button>START YOUR ORDER</button></a>
             </div>`;
-            } else {
-              cartItemsContainer.innerHTML = cartHtml;
-              totalPrice();
-              updateCartHtml();
-            //   incersingQuantity();
-              // filteringCart()
+      }else{  
+            cartItemsContainer.innerHTML = cartHtml
+            updateBreakdown()
             }
-
-}
-
-function incearsingQuantity(){
-    let quantityIncreaser = document.querySelectorAll(".add-btn")
-    let quantityDecreaser = document.querySelectorAll(".delete-btn")
-    cart.forEach((item,index)=>{
-
-        quantityIncreaser[index].addEventListener("click",()=>{
-        item.itemQuantity = item.itemQuantity += 1
-
-        localStorage.setItem('cart',JSON.stringify(cart))
-
-        document.querySelectorAll(".cart-item-qty")[index].innerHTML = item.itemQuantity
-        
-        rendering()
-        })
-
-})
 }
 
 
 
 
+function updateBreakdown(){
+let breakDownTotal = document.querySelector(".breakdown-total")
+let breakDownDelivery = document.querySelector(".breakdown-dilavery")
+let breakDownGrandTotal = document.querySelector(".breakdown-grand")
+let confirmSummaryItems = document.querySelector(".confirm-summary-items")
+let confirmSummaryTotalPrice = document.querySelector(".confirm-summary-Total-price")
 
+let totalItems = 0 ;
+let Total = 0;
+let grandTotal = 0;
+let deliveryCharges = 0
 
-
-
-
-
-
-
-
-
-
-
-function updateCartHtml(){
-let cartCount1 =  document.querySelector(".cart-count1")
-let cartCount2 =  document.querySelector(".cart-count2")
-let confirmSummarItems = document.querySelector(".confirm-summary-items")
-let quantityIncreaser = document.querySelectorAll(".add-btn")
-  
-    let quantity = 0
-    cart.forEach(item =>{
-        quantity += item.itemQuantity
-    })
- 
-    
-    
-    cartCount1.innerHTML = quantity
-    cartCount2.innerHTML = quantity
-    confirmSummarItems.innerHTML = `${quantity} ITEMS`
-}
-
-
-// totalPrice()
-
-
-function totalPrice(){
-let breakdownTotal = document.querySelector(".breakdown-total")
-let totalPriceSummary = document.querySelector(".confirm-summary-Total-price")
-let itemTotal = document.querySelectorAll(".cart-item-total")
-let deliveryChargesHtml = document.querySelector(".breakdown-dilavery")
-let grandTotal = document.querySelector(".breakdown-grand")
-let totalPrice = 0
-let diliverycharges = 0
-
-if(cart.length > 0){
-    diliverycharges = 100
-}else{
-    diliverycharges = 0
-}
 
 cart.forEach((item,index)=>{
-    
-    itemTotalPrice = 0
-    itemTotalPrice += Number(item.itemPrice) * Number(item.itemQuantity)
-    // console.log(itemTotalPrice)
-    itemTotal[index].innerHTML = `RS<br>${itemTotalPrice}`
-    
-    totalPrice += Number(item.itemPrice) * Number(item.itemQuantity)
-})
-totalPriceSummary.innerHTML = `RS. ${diliverycharges+totalPrice}`
-breakdownTotal.innerHTML = totalPrice
-deliveryChargesHtml.innerHTML = diliverycharges
-grandTotal.innerHTML = diliverycharges + totalPrice
+    totalItems += item.quantity
+    console.log(totalItems)
+    Total += item.quantity * item.price
 
+    if(totalItems > 1){
+        deliveryCharges = 100
+    }else{
+        deliveryCharges = 0
+    }
+
+    console.log(deliveryCharges)
+
+    grandTotal = Total + deliveryCharges
+    breakDownTotal.innerHTML = Total
+    breakDownDelivery.innerHTML = deliveryCharges
+    breakDownGrandTotal.innerHTML = grandTotal 
+    confirmSummaryItems.innerHTML = `${totalItems} ITEMS `
+    confirmSummaryTotalPrice.innerHTML = `RS. ${grandTotal}`
+})
 }
 
-
-
-
-// function filteringCart(){
-//     cart = cart.filter(items => item.itemQuantity > 0)
-
-//     localStorage.setItem('cart',JSON.stringify(cart))
-//     updateCartHtml()
-//     totalPrice()
-//     incersingQuantity()
-// }
 
 
 
 rendering()
+// localStorage.clear()

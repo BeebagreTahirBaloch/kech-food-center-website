@@ -195,6 +195,18 @@ textarea {
     font-family: 'Poppins', sans-serif;
 }
 
+.input-address{
+     width: 100%;
+    height: 80px;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
 
 .price-breakdown {
     margin-top: 15px;
