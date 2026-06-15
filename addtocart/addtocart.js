@@ -49,12 +49,26 @@ cartItemsContainer.addEventListener("click",(event)=>{
 
 if(cart.length > 0){
 confirmButton.addEventListener("click",()=>{
+    
+
     inputAdress =  document.querySelector(".input-address")
     if(inputAdress.value === ''){
-        alert("Please enter Your Adress")}
+        alert("Please enter Your Adress")
+    return
+    }
 
-    localStorage.setItem('cart',JSON.stringify(cart))
-    rendering()
+    let orderDetails = cart.map(item => 
+    `${item.name} ${item.label || ''} x${item.quantity} = RS.${item.price * item.quantity}`
+).join('%0A')
+let address = inputAdress.value;
+let totalAmount = cart.reduce((total, item) => total + (item.price * item.quantity), 0)
+
+let message = `🍔 *New Order - Kech Food Center*%0A%0A${orderDetails}%0A%0A💰 *Total: RS.${totalAmount + 100}*%0A📍 *Address:* ${address}%0A%0A_Please confirm this order_`
+
+let phoneNumber = "923352053652" // delivery guy number
+
+window.open(`https://wa.me/${phoneNumber}?text=${message}`)
+
 })
 }
 
