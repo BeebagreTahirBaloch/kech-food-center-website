@@ -1,3 +1,19 @@
+// adivstment popup----------------------------------------///////////////
+let advistementOverlay = document.querySelector(".advert-overlay")
+
+window.onload = ()=>{
+     advistementOverlay.style.display = "flex"
+}
+
+advistementOverlay.addEventListener("click",(event)=>{
+    if(event.target === advistementOverlay ){ document.querySelector(".advert-overlay").style.display = "none"}
+})
+
+document.querySelector(".advert-close").addEventListener("click",()=>{
+     document.querySelector(".advert-overlay").style.display = "none"
+
+})
+// ------------
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
  
 console.log(cart)

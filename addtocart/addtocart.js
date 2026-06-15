@@ -56,7 +56,7 @@ confirmButton.addEventListener("click",()=>{
         alert("Please enter Your Adress")
     return
     }
-
+// order detail rendering to whatsapp--------------------------------
     let orderDetails = cart.map(item => 
     `${item.name} ${item.label || ''} x${item.quantity} = RS.${item.price * item.quantity}`
 ).join('%0A')
@@ -68,6 +68,9 @@ let message = `🍔 *New Order - Kech Food Center*%0A%0A${orderDetails}%0A%0A�
 let phoneNumber = "923352053652" // delivery guy number
 
 window.open(`https://wa.me/${phoneNumber}?text=${message}`)
+
+// ------------------------------------------------------------------
+
 
 })
 }
@@ -108,6 +111,8 @@ cart.forEach((item,index)=>{
         document.querySelector(".breakdown-grand").innerHTML=0;
         document.querySelector(".confirm-summary-items").innerHTML='0 ITEMS';
         document.querySelector(".confirm-summary-Total-price").innerHTML='RS.0';
+        document.querySelector(".cart-count2").innerHTML = 0;
+        document.querySelector(".cart-count1").innerHTML = 0;
         document.querySelector(".confirm-button").addEventListener("click",()=>{
             alert("Add something to the Cart🍕🍔🍟")
         })
