@@ -36,9 +36,9 @@ cartItemsContainer.addEventListener("click",(event)=>{
         if(cart[deletebtn.dataset.index].quantity <= 0){
             cart.splice(deletebtn.dataset.index,1)
         }
+        rendering()
         localStorage.setItem('cart',JSON.stringify(cart))
         
-        rendering()
     }
 })
 
@@ -48,11 +48,13 @@ cartItemsContainer.addEventListener("click",(event)=>{
 
 
 if(cart.length > 0){
-
 confirmButton.addEventListener("click",()=>{
     inputAdress =  document.querySelector(".input-address")
     if(inputAdress.value === ''){
         alert("Please enter Your Adress")}
+
+    localStorage.setItem('cart',JSON.stringify(cart))
+    rendering()
 })
 }
 
@@ -63,7 +65,6 @@ let cartHtml = ''
 cart.forEach((item,index)=>{
     
     let Total = item.quantity * item.price
-
 
     cartHtml += ` <div class="cart-item">
                 <div class="cart-item-left">
@@ -88,6 +89,11 @@ cart.forEach((item,index)=>{
         // cartItemsContainer.style.display = "none"
         document.querySelector(".voucher-box").style.display = "none"
         document.querySelector(".confirm-button").style.color = "red"
+        document.querySelector(".breakdown-total").innerHTML = 0;
+        document.querySelector(".breakdown-dilavery").innerHTML=0;
+        document.querySelector(".breakdown-grand").innerHTML=0;
+        document.querySelector(".confirm-summary-items").innerHTML='0 ITEMS';
+        document.querySelector(".confirm-summary-Total-price").innerHTML='RS.0';
         document.querySelector(".confirm-button").addEventListener("click",()=>{
             alert("Add something to the Cart🍕🍔🍟")
         })
@@ -110,6 +116,8 @@ let breakDownDelivery = document.querySelector(".breakdown-dilavery")
 let breakDownGrandTotal = document.querySelector(".breakdown-grand")
 let confirmSummaryItems = document.querySelector(".confirm-summary-items")
 let confirmSummaryTotalPrice = document.querySelector(".confirm-summary-Total-price")
+let cartCount1 = document.querySelector(".cart-count1")
+let cartCount2 = document.querySelector(".cart-count2")
 
 let totalItems = 0 ;
 let Total = 0;
@@ -119,6 +127,10 @@ let deliveryCharges = 0
 
 cart.forEach((item,index)=>{
     totalItems += item.quantity
+    cartCount1.innerHTML = totalItems
+    cartCount2.innerHTML = totalItems
+
+
     console.log(totalItems)
     Total += item.quantity * item.price
 
