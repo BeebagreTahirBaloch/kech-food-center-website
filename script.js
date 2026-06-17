@@ -107,7 +107,7 @@ const menuSection = [
       },
       {
         name: "KFC Special Burger",
-        image: "./images/jumbo burger.png",
+        image: "./images/jumbo burger 5.jpg",
         desc: "2 breaded chicken patties, cheese, lettuce and special sauce",
         price: 500,
       },
@@ -149,7 +149,7 @@ const menuSection = [
       },
       {
         name: "Malai Butti",
-        image: "./images/chicken butti bbq.jpg",
+        image: "./images/malai buti bbq.jpg",
         desc: "Chicken pieces, marinated with yogurt and spices, rich taste",
         price: 500,
       },
