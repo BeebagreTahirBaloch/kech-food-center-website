@@ -518,7 +518,7 @@ card.addEventListener("click", (event) => {
         // console.log(sizesButtonLabel)
         // console.log(sizesButtonPrice)
         document.querySelector(".popup-add-btn").innerHTML =
-          `Add to Cart-RS:${button.dataset.price}`;
+          `Add to Cart<br>RS:${button.dataset.price}`;
       });
     });
     btnLabel = sizes[0].label;

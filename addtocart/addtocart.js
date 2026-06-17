@@ -141,9 +141,9 @@ let cartCount2 = document.querySelector(".cart-count2")
 let totalItems = 0 ;
 let Total = 0;
 let grandTotal = 0;
+
+
 let deliveryCharges = 0
-
-
 cart.forEach((item,index)=>{
     totalItems += item.quantity
     cartCount1.innerHTML = totalItems
@@ -153,7 +153,7 @@ cart.forEach((item,index)=>{
     console.log(totalItems)
     Total += item.quantity * item.price
 
-    if(totalItems > 1){
+    if(totalItems > 0){
         deliveryCharges = 100
     }else{
         deliveryCharges = 0
