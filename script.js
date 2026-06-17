@@ -13,7 +13,7 @@ document.querySelector(".advert-close").addEventListener("click",()=>{
      document.querySelector(".advert-overlay").style.display = "none"
 
 })
-// ------------
+// --------------------
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
  
 console.log(cart)

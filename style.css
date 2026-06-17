@@ -166,6 +166,10 @@ nav, .nav3, .bottom-nav {
 /* ── HERO ── */
 .hero-img { margin-top: 185px; margin-left: 30px; }
 
+@media (min-width: 493px) {
+    .hero-img { max-height: 400px; object-fit: cover; }
+}
+
 /* ── SECTION HEADINGS ── */
 #section-heading-roll,
 #section-heading-fries,
@@ -364,7 +368,7 @@ footer {
 }
 
 @media (max-width: 492px) {
-    .hero-img { width: 96%; height: 140px; margin-left: 13px; margin-top: 156px; }
+    .hero-img { width: 96%; height: 140px; margin-left: 8px; margin-top: 156px; }
     .nav3 h3 { font-size: 3.2vw;  white-space: normal;  word-break: break-word;  padding: 10px 15px; }
     .delivering-to { font-size: 12px; }
     #nav-dropdown { font-size: 14px; }
